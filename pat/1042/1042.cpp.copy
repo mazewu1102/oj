@@ -1,0 +1,47 @@
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
+
+#include <iostream>
+#include <string>
+
+#include <stack>
+#include <queue>
+#include <map>
+
+using namespace std;
+
+const char pre[5] = {'S', 'H', 'C', 'D', 'J'};
+
+int main()
+{
+    int n;
+    int poke[55];
+    int save[55];
+    int order[55];
+    scanf("%d", &n);
+    for (int i = 1; i <= 54; ++i)
+    {
+        scanf("%d", order+i);
+        poke[i] = i;
+    }
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 1; j <= 54; ++j)
+            save[order[j]] = poke[j];
+        for (int j = 1; j <= 54; ++j)
+            poke[j] = save[j];
+    }
+    for (int i = 1; i <= 54; ++i)
+    {
+        int t1 = (poke[i] - 1) % 13;
+        int t2 = (poke[i] - 1) / 13;
+        printf("%c%d", pre[t2], t1+1);
+        if (i == 54)
+            printf("\n");
+        else
+            printf(" ");
+    }
+    return 0;
+}
